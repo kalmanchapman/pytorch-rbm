@@ -1,3 +1,7 @@
 *.pyc
 __pycache__/
 data/
+
+.ipynb_*
+
+*.sw[a-z]
