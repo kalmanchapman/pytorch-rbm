@@ -1,0 +1,41 @@
+version: '3'
+services:
+  pytorch-rbm:
+    build: .
+    entrypoint:
+    - jupyter
+    - notebook
+    - --ip=0.0.0.0
+    - --port=8888
+    - --allow-root
+    - --no-browser
+    ports:
+    - 8888:8888
+    volumes:
+    - .:/app
+    - logvolume01:/var/log
+    links:
+    - redis
+  ring-buffer:
+    build:
+      context: .
+      dockerfile: Dockerfile.asyncio
+    entrypoint:
+    - jupyter
+    - notebook
+    - --ip=0.0.0.0
+    - --port=8899
+    - --allow-root
+    - --no-browser
+    ports:
+    - 8899:8899
+    volumes:
+    - .:/app
+    links:
+    - redis
+  redis:
+    image: redis
+    ports:
+    - 6379:6379
+volumes:
+  logvolume01: {}

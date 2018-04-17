@@ -1,0 +1,10 @@
+FROM python:3.6.5
+
+RUN pip install numpy scipy
+RUN pip install pandas sklearn
+RUN pip install jupyter asyncio_redis
+
+COPY . /app
+WORKDIR /app
+
+RUN /bin/bash
